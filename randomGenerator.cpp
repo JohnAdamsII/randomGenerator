@@ -4,13 +4,17 @@
 #include <cstdlib>   // rand,srand
 #include <unistd.h>  // usleep
 
-#include <future>
-#include <ctime>
+//! for mutitheading in the future!
+/* #include <future>
+    #include <ctime> */
+
+//! color macro defintions
+#include "colors.h"
 
 #define UPPER_BOUND 1
 #define LOWER_BOUND 0
 #define NUM_VECS 100
-#define LEN_VECS 70
+#define LEN_VECS 72
 #define SLEEP_TIME 100000
 
 using namespace std;
@@ -22,14 +26,19 @@ int main()
     vector<int> randomNums;
     srand(time(NULL));
 
+    cout << KGRN; //* set color
+
     for (int i = 0; i < NUM_VECS; i++)
     {
         randomNums = getRandomVec(LEN_VECS);
         for (auto i: randomNums)
             cout << i << ' ';
+       
+        usleep(SLEEP_TIME);
         cout << '\n';  
     }
 
+    cout << RST; //* reset color
     return 0;
 }
 
@@ -43,8 +52,6 @@ vector<int> getRandomVec(int vecLen)
         randNum = randNumGenerator(UPPER_BOUND,LOWER_BOUND);
         randomNums.push_back(randNum);
     }
-
-    usleep(SLEEP_TIME);
 
     return randomNums; 
 }
