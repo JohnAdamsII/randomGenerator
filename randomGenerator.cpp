@@ -4,29 +4,32 @@
 #include <cstdlib>   // rand,srand
 #include <unistd.h>  // usleep
 
-//! color macro defintions
+//! ANSI color LUT macro defintions
 #include "colors.h"
 
-#define UPPER_BOUND 1
-#define LOWER_BOUND 0
-#define NUM_VECS 100
-#define LEN_VECS 72
-#define SLEEP_TIME 100000
+//! constants
+static const unsigned int UPPER_BOUND = 1;
+static const unsigned int LOWER_BOUND = 0;
+static const unsigned int NUM_VECS = 100;
+static const unsigned int LEN_VECS = 72;
+static const unsigned int SLEEP_TIME = 100000;
 
-// need to get terminal width and generator current length vector based off of this
+//* need to get terminal width and generator current length vector based off of this
 
 using namespace std;
-vector<int> getRandomVec(int vecLen);
+
+//! function declarations
+vector<unsigned int> getRandomVec(unsigned int vecLen);
 int randNumGenerator(int upper, int lower) { return rand()% (upper + 1 - lower) + lower; }
 
 int main()
 {
-    vector<int> randomNums;
+    vector<unsigned int> randomNums;
     srand(time(NULL));
 
     cout << KGRN; //* set color
 
-    for (int i = 0; i < NUM_VECS; i++)
+    for (unsigned int i = 0; i < NUM_VECS; i++)
     {
         randomNums = getRandomVec(LEN_VECS);
         for (auto i: randomNums)
@@ -40,15 +43,15 @@ int main()
     return 0;
 }
 
-vector<int> getRandomVec(int vecLen)
+vector<unsigned int> getRandomVec(unsigned int vecLen)
 {
-    vector<int> randomNums;
+    vector<unsigned int> randomNums;
     int randNum;
 
-    for (int i = 0; i < vecLen; i++) 
+    for (unsigned int i = 0; i < vecLen; i++) 
     {
         randNum = randNumGenerator(UPPER_BOUND,LOWER_BOUND);
-        randomNums.push_back(randNum);
+        randomNums.emplace_back(randNum);
     }
 
     return randomNums; 
