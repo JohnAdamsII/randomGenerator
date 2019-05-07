@@ -4,10 +4,6 @@
 #include <cstdlib>   // rand,srand
 #include <unistd.h>  // usleep
 
-//! for mutitheading in the future!
-/* #include <future>
-    #include <ctime> */
-
 //! color macro defintions
 #include "colors.h"
 
@@ -16,6 +12,8 @@
 #define NUM_VECS 100
 #define LEN_VECS 72
 #define SLEEP_TIME 100000
+
+// need to get terminal width and generator current length vector based off of this
 
 using namespace std;
 vector<int> getRandomVec(int vecLen);
