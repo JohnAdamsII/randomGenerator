@@ -12,10 +12,10 @@
 static const unsigned int UPPER_BOUND = 1;
 static const unsigned int LOWER_BOUND = 0;
 static const unsigned int NUM_VECS = 1000000;
-static const unsigned int LEN_VECS = 86;
+static const unsigned int LEN_VECS = 100;
 static const unsigned int SLEEP_TIME = 100000;
 
-//* need to get terminal width and generator current length vector based off of this
+//* need to split into 4 threads of 25 and use mutithreading
 
 using namespace std;
 
@@ -36,7 +36,7 @@ int main()
     {
         randomNums = getRandomVec(LEN_VECS,UPPER_BOUND,LOWER_BOUND);
         for (auto i: randomNums)
-            cout << i << ' ';
+            cout << i;
        
         // usleep(SLEEP_TIME); //! Sleep to slow down printing
         cout << '\n';  
@@ -61,7 +61,7 @@ vector<unsigned int> getRandomVec(unsigned int randVecLen, unsigned int randNumU
     return randomNums; 
 }
 
-//! run $ /usr/bin/time ./randGem      to get execution time
+//! run $ /usr/bin/time ./randGem      to get execution time on UNIX
 
 
 
