@@ -1,9 +1,10 @@
-#include <iostream>  // cout
-#include <vector>    // vector
-#include <ctime>     // time
-#include <cstdlib>   // rand,srand
-#include <unistd.h>  // usleep
-#include <time.h>    //clock for execution time
+#include <iostream>
+#include <vector>
+#include <ctime>
+#include <cstdlib>
+#include <unistd.h>
+#include <time.h>
+#include <thread>
 
 //! ANSI color LUT macro defintions
 #include "colors.h"
@@ -11,7 +12,7 @@
 //! constants
 static const unsigned int UPPER_BOUND = 1;
 static const unsigned int LOWER_BOUND = 0;
-static const unsigned int NUM_VECS = 1000000;
+static const unsigned int NUM_VECS = 100;
 static const unsigned int LEN_VECS = 100;
 static const unsigned int SLEEP_TIME = 100000;
 
@@ -25,13 +26,13 @@ int randNumGenerator(unsigned int upper, unsigned int lower) { return rand()% (u
 
 int main()
 {
-    clock_t tStart = clock(); //* Start Timer
+    clock_t tStart = clock();
 
     vector<unsigned int> randomNums;
     srand(time(NULL));
 
     cout << KGRN; //* set color
-
+    
     for (unsigned int i = 0; i < NUM_VECS; i++)
     {
         randomNums = getRandomVec(LEN_VECS,UPPER_BOUND,LOWER_BOUND);
@@ -43,14 +44,20 @@ int main()
     }
 
     cout << RST; //* reset color
-    printf("Time taken: %.2fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC); //* print execution time
+
+    cout << "Generated " << NUM_VECS << " random vectors of length " << LEN_VECS << " in: ";
+    printf("%.4fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
+
+    unsigned int numThreads = std::thread::hardware_concurrency();
+    cout << "Concurrent threads are supported: " << numThreads << endl;
+    
     return 0;
 }
 
 vector<unsigned int> getRandomVec(unsigned int randVecLen, unsigned int randNumUpperBound, unsigned int randNumLowerBound)
 {
     vector<unsigned int> randomNums;
-    int randNum;
+    unsigned int randNum;
 
     for (unsigned int i = 0; i < randVecLen; i++) 
     {
