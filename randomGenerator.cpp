@@ -1,3 +1,5 @@
+//! Run with: g++ randomGenerator.cpp -o randGen && ./randGen
+
 #include <iostream>
 #include <vector>
 #include <ctime>
