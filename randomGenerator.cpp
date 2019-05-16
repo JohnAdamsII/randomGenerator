@@ -13,10 +13,12 @@
 #include "colors.h"
 
 //! constants
+const char *argv0;
 //static const unsigned int SLEEP_TIME = 100'000;
 
   //* TO DO:
         //* Error handling command line args
+        //* support negative numbers
         //* unit tests
         //* support variable len vecs and variable number vecs 
         //* support doubles (decimal numbers) by making templated function?
@@ -29,16 +31,40 @@ using namespace std;
 vector<unsigned int> getRandomVec(unsigned int randVecLen, unsigned int randNumUpperBound, unsigned int randNumLowerBound);
 int randNumGenerator(unsigned int upper, unsigned int lower) { return rand()% (upper + 1 - lower) + lower; }
 
+
+void usage(FILE *f, int err) 
+{
+    fprintf(f,
+            "USAGE: %s NUM_VECS LEN_VECS MIN MAX\n\n"
+            "Generates random vectors and prints them to stdout.\n",
+            argv0);
+    exit(err);
+}
+
+
 int main(int argc, const char *argv[])
 {
+    argv0 = argv[0];
+
     clock_t tStart = clock();
     
     srand(time(NULL));
 
-     if (argc == 1)
-     {
+    if (argc != 5)
+    {
+        usage(stderr, 1);
+    }
 
-     }
+     if (argv[1] == "--help" || argv[1] == "-h")
+        //usage(stdout, 0);
+        cout << "ARGS";
+
+    //  if (argc == 1)
+    //  {
+    //       int random_number = rand()% (10000 + 1 - 0) + 0;
+    //       cout << random_number;
+    //       exit(0);
+    //  }
 
     static const unsigned int NUM_VECS = stoi(argv[1]);
     static const unsigned int LEN_VECS = stoi(argv[2]);
@@ -46,7 +72,7 @@ int main(int argc, const char *argv[])
     static const unsigned int UPPER_BOUND = stoi(argv[4]);
 
     vector<unsigned int> randomNums;
-    //cout << KGRN; //* set color
+    cout << KGRN; //* set color
     
     for (unsigned int i = 0; i < NUM_VECS; i++)
     {
@@ -58,10 +84,10 @@ int main(int argc, const char *argv[])
         cout << '\n';  
     }
 
-    //cout << RST; //* reset color
+    cout << RST; //* reset color
 
-    //cout << "Generated " << NUM_VECS << " random vectors of length " << LEN_VECS << " in: ";
-    //printf("%.4fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
+    cout << "Generated " << NUM_VECS << " random vectors of length " << LEN_VECS << " in: ";
+    printf("%.4fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
 
     //int numThreads = std::thread::hardware_concurrency();
     //cout << "Concurrent threads supported: " << numThreads << endl;
