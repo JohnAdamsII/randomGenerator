@@ -1,34 +1,17 @@
-//! Run with: g++ randomGenerator.cpp -o randGen && ./randGen
-
 #include <iostream>
-#include <ctime>
-#include <cstdlib>
 #include <string>
-#include <unistd.h>
-#include <time.h>
-#include <thread>
 
 //! ANSI color LUT macro defintions
 #include "colors.h"
 
+using namespace std;
+
 //! constants
 static const char *argv0;
-
-  //* TO DO:
-        //* Error handling command line args
-        //* support negative numbers
-        //* unit tests
-        //* support variable len vecs and variable number vecs 
-        //* support doubles (decimal numbers) by making templated function?
-        //* move main to different file
-        //* need to split into n threads of n/4 and use mutithreading
-
-using namespace std;
 
 //! function declarations
 void printRandomVec(long unsigned int randVecLen, long int randNumUpperBound, long int randNumLowerBound);
 long int randNumGenerator(long int upper, long int lower) { return rand()% (upper + 1 - lower) + lower; }
-
 
 void usage(FILE *f, int err) 
 {
@@ -96,6 +79,7 @@ int main(int argc, const char *argv[])
 
     return 0;
 }
+
 
 void printRandomVec(long unsigned int randVecLen, long int randNumUpperBound, long int randNumLowerBound)
 {
