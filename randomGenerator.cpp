@@ -12,7 +12,7 @@
 #include "colors.h"
 
 //! constants
-const char *argv0;
+static const char *argv0;
 
   //* TO DO:
         //* Error handling command line args
@@ -27,7 +27,7 @@ using namespace std;
 
 //! function declarations
 void printRandomVec(long unsigned int randVecLen, long int randNumUpperBound, long int randNumLowerBound);
-int randNumGenerator(long int upper, long int lower) { return rand()% (upper + 1 - lower) + lower; }
+long int randNumGenerator(long int upper, long int lower) { return rand()% (upper + 1 - lower) + lower; }
 
 
 void usage(FILE *f, int err) 
