@@ -1,2 +1,4 @@
 .vscode/
-randGen
+randGentags
+*.swp
+tags
